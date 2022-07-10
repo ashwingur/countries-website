@@ -49,6 +49,10 @@ export default function CountryCard(props) {
           </p>
           {isExpanded && (
             <div>
+              <p className="country-card--official_name">
+                <span className="country-card--fact_title">Official Name:</span>{" "}
+                {props.name.official}
+              </p>
               <p className="country-card--currencies">
                 <span className="country-card--fact_title">Currencies:</span>{" "}
                 {currencies.join(", ")}
@@ -56,6 +60,10 @@ export default function CountryCard(props) {
               <p className="country-card--independent">
                 <span className="country-card--fact_title">Independent:</span>{" "}
                 {props.independent ? "Yes" : "No"}
+              </p>
+              <p className="country-card--un_member">
+                <span className="country-card--fact_title">UN Member:</span>{" "}
+                {props.unMember ? "Yes" : "No"}
               </p>
             </div>
           )}

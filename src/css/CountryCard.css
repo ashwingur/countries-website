@@ -22,6 +22,7 @@
 
 .country-card--flag {
   width: 300px;
+  margin-bottom: auto;
 }
 
 .country-card--fact_title {

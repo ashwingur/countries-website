@@ -8,7 +8,10 @@ export default function AllCountries() {
     filtersEnabled: false,
     region: "Any",
     independent: "Either",
+    searchCountry: "",
   });
+
+  console.log(JSON.stringify(filter));
 
   let countryCards;
 
@@ -29,6 +32,21 @@ export default function AllCountries() {
       })
       .filter((country) => {
         return country.region == filter.region || filter.region == "Any";
+      })
+      .filter((country) => {
+        if (
+          filter.searchCountry == "" ||
+          country.name.common
+            .toLowerCase()
+            .includes(filter.searchCountry.toLowerCase()) ||
+          country.name.official
+            .toLowerCase()
+            .includes(filter.searchCountry.toLowerCase())
+        ) {
+          return true;
+        } else {
+          return false;
+        }
       })
       .map((country) => <CountryCard {...country} key={country.cca2} />);
   }
@@ -62,7 +80,7 @@ export default function AllCountries() {
 
       <div className="all-countries-filter">
         <span className="all-countries-filter_item">
-          <label htmlFor="filtersEnabled">Enable Filters</label>
+          <label htmlFor="filtersEnabled">Enable Filters </label>
           <input
             type="checkbox"
             id="filtersEnabled"
@@ -72,10 +90,10 @@ export default function AllCountries() {
           />
         </span>
         <span className="all-countries-filter_item">
-          <label htmlFor="independent">Independent</label>
+          <label htmlFor="independent">Independent </label>
           <select
             id="independent"
-            //   value={filter.region}
+            value={filter.region}
             onChange={handleFilter}
             name="independent"
             disabled={!filter.filtersEnabled}
@@ -86,10 +104,10 @@ export default function AllCountries() {
           </select>
         </span>
         <span className="all-countries-filter_item">
-          <label htmlFor="region">Region</label>
+          <label htmlFor="region">Region </label>
           <select
             id="region"
-            //   value={filter.region}
+            value={filter.region}
             onChange={handleFilter}
             name="region"
             disabled={!filter.filtersEnabled}
@@ -101,6 +119,17 @@ export default function AllCountries() {
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
           </select>
+        </span>
+        <span className="all-countries-filter_item">
+          <label htmlFor="searchCountry">Search For Country </label>
+          <input
+            id="searchCountry"
+            name="searchCountry"
+            onChange={handleFilter}
+            value={filter.searchCountry}
+            disabled={!filter.filtersEnabled}
+            placeholder="Country Name"
+          />
         </span>
       </div>
       {countryCards}
