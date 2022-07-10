@@ -32,7 +32,7 @@ export default function CountryCard(props) {
         <img className="country-card--flag" src={props.flags.svg} />
         <div className="country-card--facts">
           <p className="country-card--capitals">
-            <span className="country-card--fact_title">Capitals:</span>{" "}
+            <span className="country-card--fact_title">Capital:</span>{" "}
             {props.capital}
           </p>
           <p className="country-card--region">

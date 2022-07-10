@@ -6,8 +6,8 @@ export default function AllCountries() {
   const [allCountries, setAllCountries] = useState([]);
   const [filter, setFilter] = useState({
     filtersEnabled: false,
-    isIndependent: false,
     region: "Any",
+    independent: "Either",
   });
 
   let countryCards;
@@ -19,7 +19,13 @@ export default function AllCountries() {
   } else {
     countryCards = allCountries
       .filter((country) => {
-        return country.independent == filter.isIndependent;
+        if (filter.independent == "Either") {
+          return true;
+        } else if (filter.independent == "Yes") {
+          return country.independent;
+        } else {
+          return !country.independent;
+        }
       })
       .filter((country) => {
         return country.region == filter.region || filter.region == "Any";
@@ -55,40 +61,47 @@ export default function AllCountries() {
       </h2>
 
       <div className="all-countries-filter">
-        <label htmlFor="filtersEnabled">Enable Filters</label>
-        <input
-          type="checkbox"
-          id="filtersEnabled"
-          name="filtersEnabled"
-          onChange={handleFilter}
-          value={filter.filtersEnabled}
-        />
-
-        <label htmlFor="isIndependent">Independent</label>
-        <input
-          type="checkbox"
-          id="isIndependent"
-          name="isIndependent"
-          onChange={handleFilter}
-          disabled={!filter.filtersEnabled}
-          value={filter.isIndependent}
-        />
-
-        <label htmlFor="region">Region</label>
-        <select
-          id="region"
-          //   value={filter.region}
-          onChange={handleFilter}
-          name="region"
-          disabled={!filter.filtersEnabled}
-        >
-          <option value="any">Any</option>
-          <option value="Africa">Africa</option>
-          <option value="Americas">Americas</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-        </select>
+        <span className="all-countries-filter_item">
+          <label htmlFor="filtersEnabled">Enable Filters</label>
+          <input
+            type="checkbox"
+            id="filtersEnabled"
+            name="filtersEnabled"
+            onChange={handleFilter}
+            value={filter.filtersEnabled}
+          />
+        </span>
+        <span className="all-countries-filter_item">
+          <label htmlFor="independent">Independent</label>
+          <select
+            id="independent"
+            //   value={filter.region}
+            onChange={handleFilter}
+            name="independent"
+            disabled={!filter.filtersEnabled}
+          >
+            <option value="Either">Either</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </span>
+        <span className="all-countries-filter_item">
+          <label htmlFor="region">Region</label>
+          <select
+            id="region"
+            //   value={filter.region}
+            onChange={handleFilter}
+            name="region"
+            disabled={!filter.filtersEnabled}
+          >
+            <option value="Any">Any</option>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </span>
       </div>
       {countryCards}
     </div>
