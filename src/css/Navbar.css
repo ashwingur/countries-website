@@ -1,0 +1,15 @@
+nav {
+  background-color: #568bdb;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.nav--logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.nav--title {
+  color: white;
+}
