@@ -1,0 +1,15 @@
+.country-card {
+  margin: 20px 10%;
+}
+
+.country-card--content {
+  display: flex;
+}
+
+.country-card--facts {
+  margin-left: 20px;
+}
+
+.country-card--flag {
+  width: 30%;
+}
