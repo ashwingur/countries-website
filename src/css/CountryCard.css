@@ -5,6 +5,7 @@
 
 .country-card:hover {
   background-color: lightgray;
+  transition: background-color 0.1s linear;
 }
 
 .country-card + .country-card {
