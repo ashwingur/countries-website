@@ -1,0 +1,12 @@
+.all-countries {
+  display: flex;
+  flex-direction: column;
+}
+
+.all-countries-filter {
+  align-self: center;
+}
+
+.all-countries--title {
+  align-self: center;
+}

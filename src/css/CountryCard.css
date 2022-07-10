@@ -1,5 +1,14 @@
 .country-card {
-  margin: 20px 10%;
+  margin: 0px 10%;
+  padding: 20px;
+}
+
+.country-card:hover {
+  background-color: lightgray;
+}
+
+.country-card + .country-card {
+  border-top: 1px solid gray;
 }
 
 .country-card--content {
@@ -11,5 +20,9 @@
 }
 
 .country-card--flag {
-  width: 30%;
+  width: 300px;
+}
+
+.country-card--fact_title {
+  font-weight: bold;
 }
