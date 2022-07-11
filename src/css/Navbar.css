@@ -13,3 +13,31 @@ nav {
 .nav--title {
   color: white;
 }
+
+.nav--menu {
+  list-style-type: none;
+  margin-left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+  padding: 0;
+  overflow: hidden;
+  background-color: #568bdb;
+}
+
+.nav--menu > li {
+  float: left;
+}
+
+.nav--menu > li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav--menu > li:hover,
+li > a:hover {
+  background-color: #98b9eb;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CountryCard from "./CountryCard";
-import "../css/AllCountries.css";
+import CountryCard from "../CountryCard";
+import "../../css/AllCountries.css";
 
 export default function AllCountries() {
   const [allCountries, setAllCountries] = useState([]);
