@@ -35,9 +35,9 @@ nav {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  transition: background-color 0.7s ease;
 }
 
-.nav--menu > li:hover,
-li > a:hover {
+a:hover {
   background-color: #98b9eb;
 }
