@@ -65,6 +65,28 @@ export default function CountryCard(props) {
                 <span className="country-card--fact_title">UN Member:</span>{" "}
                 {props.unMember ? "Yes" : "No"}
               </p>
+              <p className="country-card--subregion">
+                <span className="country-card--fact_title">Subregion:</span>{" "}
+                {props.subregion}
+              </p>
+              <p className="country-card--latlng">
+                <span className="country-card--fact_title">
+                  Latitude, Longitude:
+                </span>{" "}
+                {props.latlng.map((num) => `${num.toFixed(2)}°`).join(", ")}
+              </p>
+              <p className="country-card--landlocked">
+                <span className="country-card--fact_title">Landlocked:</span>{" "}
+                {props.landlocked ? "Yes" : "No"}
+              </p>
+              <p className="country-card--area">
+                <span className="country-card--fact_title">Area:</span>{" "}
+                {props.area.toLocaleString()} km<sup>2</sup>
+              </p>
+              <p className="country-card--timezones">
+                <span className="country-card--fact_title">Timezones:</span>{" "}
+                {props.timezones.join(", ")}
+              </p>
             </div>
           )}
         </div>

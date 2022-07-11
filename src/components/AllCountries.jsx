@@ -5,7 +5,6 @@ import "../css/AllCountries.css";
 export default function AllCountries() {
   const [allCountries, setAllCountries] = useState([]);
   const [filter, setFilter] = useState({
-    filtersEnabled: false,
     region: "Any",
     independent: "Either",
     searchCountry: "",
@@ -13,43 +12,35 @@ export default function AllCountries() {
 
   console.log(JSON.stringify(filter));
 
-  let countryCards;
-
-  if (!filter.filtersEnabled) {
-    countryCards = allCountries.map((country) => (
-      <CountryCard {...country} key={country.cca2} />
-    ));
-  } else {
-    countryCards = allCountries
-      .filter((country) => {
-        if (filter.independent == "Either") {
-          return true;
-        } else if (filter.independent == "Yes") {
-          return country.independent;
-        } else {
-          return !country.independent;
-        }
-      })
-      .filter((country) => {
-        return country.region == filter.region || filter.region == "Any";
-      })
-      .filter((country) => {
-        if (
-          filter.searchCountry == "" ||
-          country.name.common
-            .toLowerCase()
-            .includes(filter.searchCountry.toLowerCase()) ||
-          country.name.official
-            .toLowerCase()
-            .includes(filter.searchCountry.toLowerCase())
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .map((country) => <CountryCard {...country} key={country.cca2} />);
-  }
+  const countryCards = allCountries
+    .filter((country) => {
+      if (filter.independent == "Either") {
+        return true;
+      } else if (filter.independent == "Yes") {
+        return country.independent;
+      } else {
+        return !country.independent;
+      }
+    })
+    .filter((country) => {
+      return country.region == filter.region || filter.region == "Any";
+    })
+    .filter((country) => {
+      if (
+        filter.searchCountry == "" ||
+        country.name.common
+          .toLowerCase()
+          .includes(filter.searchCountry.toLowerCase()) ||
+        country.name.official
+          .toLowerCase()
+          .includes(filter.searchCountry.toLowerCase())
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .map((country) => <CountryCard {...country} key={country.cca2} />);
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -71,6 +62,14 @@ export default function AllCountries() {
     });
   }
 
+  function resetFilter(event) {
+    setFilter({
+      region: "Any",
+      independent: "Either",
+      searchCountry: "",
+    });
+  }
+
   return (
     <div className="all-countries">
       <h1 className="all-countries--title">All Countries</h1>
@@ -79,24 +78,15 @@ export default function AllCountries() {
       </h2>
 
       <div className="all-countries-filter">
-        <span className="all-countries-filter_item">
-          <label htmlFor="filtersEnabled">Enable Filters </label>
-          <input
-            type="checkbox"
-            id="filtersEnabled"
-            name="filtersEnabled"
-            onChange={handleFilter}
-            value={filter.filtersEnabled}
-          />
-        </span>
+        <button onClick={resetFilter}>Reset Filters</button>
+
         <span className="all-countries-filter_item">
           <label htmlFor="independent">Independent </label>
           <select
             id="independent"
-            value={filter.region}
+            value={filter.independent}
             onChange={handleFilter}
             name="independent"
-            disabled={!filter.filtersEnabled}
           >
             <option value="Either">Either</option>
             <option value="Yes">Yes</option>
@@ -110,7 +100,6 @@ export default function AllCountries() {
             value={filter.region}
             onChange={handleFilter}
             name="region"
-            disabled={!filter.filtersEnabled}
           >
             <option value="Any">Any</option>
             <option value="Africa">Africa</option>
@@ -127,7 +116,6 @@ export default function AllCountries() {
             name="searchCountry"
             onChange={handleFilter}
             value={filter.searchCountry}
-            disabled={!filter.filtersEnabled}
             placeholder="Country Name"
           />
         </span>
