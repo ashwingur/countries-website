@@ -6,7 +6,6 @@
 
 .flag-quiz--main {
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -21,6 +20,10 @@
   font-size: 50px;
   background-color: chocolate;
   color: white;
+  margin: 100px 50px;
+  height: 100px;
+  width: 70px;
+  padding: 30px;
 }
 
 .flag-quiz--main > span:hover {
@@ -30,5 +33,5 @@
 }
 
 .flag-quiz--flag {
-  width: 60%;
+  width: 400px;
 }

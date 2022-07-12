@@ -25,9 +25,15 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/all_countries" element={<AllCountries />} />
+        <Route
+          path="/all_countries"
+          element={<AllCountries allCountries={allCountries} />}
+        />
         <Route path="/quiz" element={<Quiz />}>
-          <Route path="flag_quiz" element={<FlagQuiz />} />
+          <Route
+            path="flag_quiz"
+            element={<FlagQuiz allCountries={allCountries} />}
+          />
         </Route>
       </Routes>
     </div>

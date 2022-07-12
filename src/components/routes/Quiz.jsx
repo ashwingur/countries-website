@@ -11,9 +11,7 @@ export default function Quiz() {
           <Link to="flag_quiz">Flag Quiz</Link>
         </li>
       </ul>
-      {/* <Routes>
-        
-      </Routes> */}
+
       <Outlet />
     </div>
   );

@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import CountryCard from "../CountryCard";
 import "../../css/AllCountries.css";
 
-export default function AllCountries() {
-  const [allCountries, setAllCountries] = useState([]);
+export default function AllCountries(props) {
   const [filter, setFilter] = useState({
     region: "Any",
     independent: "Either",
     searchCountry: "",
   });
 
-  console.log(JSON.stringify(filter));
-
-  const countryCards = allCountries
+  const countryCards = props.allCountries
     .filter((country) => {
       if (filter.independent == "Either") {
         return true;
@@ -42,15 +39,15 @@ export default function AllCountries() {
     })
     .map((country) => <CountryCard {...country} key={country.cca2} />);
 
-  useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((rest) => rest.json())
-      .then((data) => {
-        setAllCountries(
-          data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-        );
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://restcountries.com/v3.1/all")
+  //     .then((rest) => rest.json())
+  //     .then((data) => {
+  //       setAllCountries(
+  //         data.sort((a, b) => a.name.common.localeCompare(b.name.common))
+  //       );
+  //     });
+  // }, []);
 
   function handleFilter(event) {
     const { name, value, type, checked } = event.target;
