@@ -9,6 +9,7 @@
 .flag-quiz--main {
   display: flex;
   justify-content: space-between;
+  width: 80%;
 }
 
 .quiz-input {
@@ -35,5 +36,5 @@
 }
 
 .flag-quiz--flag {
-  width: 400px;
+  width: 600px;
 }
