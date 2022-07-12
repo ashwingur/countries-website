@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/FlagQuiz.css";
 
 export default function FlagQuiz(props) {
-  const [remainingCountries, setRemainingCountries] = useState([
-    ...props.allCountries,
-  ]);
+  const [totalCountries, setTotalCountries] = useState(0);
+  useEffect(() => {
+    setTotalCountries(
+      props.allCountries.filter((country) => {
+        return country.independent == true;
+      }).length
+    );
+  }, []);
+
+  const [remainingCountries, setRemainingCountries] = useState(
+    props.allCountries.filter((country) => {
+      return country.independent == true;
+    })
+  );
   const [currentCountry, setCurrentCountry] = useState(
     Math.floor(Math.random() * remainingCountries.length)
   );
@@ -67,9 +78,8 @@ export default function FlagQuiz(props) {
         autoFocus
       ></input>
       <h3>
-        Correctly Guessed:{" "}
-        {props.allCountries.length - remainingCountries.length}/
-        {props.allCountries.length}
+        Correctly Guessed: {totalCountries - remainingCountries.length}/
+        {totalCountries}
       </h3>
       <div className="flag-quiz--main">
         <span className="flag-quiz--back" onClick={gotoPrevFlag}>
