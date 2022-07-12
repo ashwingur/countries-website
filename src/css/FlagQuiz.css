@@ -1,0 +1,34 @@
+.flag-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flag-quiz--main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quiz-input {
+  font-size: large;
+  padding: 10px;
+  text-indent: 10px;
+  width: 300px;
+}
+
+.flag-quiz--main > span {
+  font-size: 50px;
+  background-color: chocolate;
+  color: white;
+}
+
+.flag-quiz--main > span:hover {
+  background-color: black;
+  transition: background-color 0.4s ease;
+  cursor: pointer;
+}
+
+.flag-quiz--flag {
+  width: 60%;
+}
