@@ -8,10 +8,31 @@ export default function FlagQuiz(props) {
   const [currentCountry, setCurrentCountry] = useState(
     Math.floor(Math.random() * remainingCountries.length)
   );
+  const [currentInput, setCurrentInput] = React.useState("");
 
   console.log(
     `Current Country is ${remainingCountries[currentCountry].name.common}`
   );
+
+  function inputChange(event) {
+    const { value } = event.target;
+    if (
+      value.trim().toLowerCase() ==
+      remainingCountries[currentCountry].name.common.toLowerCase()
+    ) {
+      setCurrentInput("");
+      setRemainingCountries((prevState) => {
+        var newState = [...prevState];
+        newState.splice(currentCountry, 1);
+        return newState;
+      });
+      if (currentCountry >= remainingCountries.length) {
+        setCurrentCountry(0);
+      }
+    } else {
+      setCurrentInput(value);
+    }
+  }
 
   function gotoNextFlag() {
     setCurrentCountry((prevIndex) => {
@@ -35,8 +56,21 @@ export default function FlagQuiz(props) {
 
   return (
     <div className="flag-quiz">
-      <input className="quiz-input" placeholder="Country"></input>
-      <h3>Correctly Guessed: 10/250</h3>
+      <input
+        type="text"
+        className="quiz-input"
+        placeholder="Country"
+        name="country"
+        id="country"
+        onChange={inputChange}
+        value={currentInput}
+        autoFocus
+      ></input>
+      <h3>
+        Correctly Guessed:{" "}
+        {props.allCountries.length - remainingCountries.length}/
+        {props.allCountries.length}
+      </h3>
       <div className="flag-quiz--main">
         <span className="flag-quiz--back" onClick={gotoPrevFlag}>
           ←
