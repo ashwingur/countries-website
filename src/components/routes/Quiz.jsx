@@ -1,6 +1,6 @@
 import React from "react";
-import { Routes, Route, Link, Outlet } from "react-router-dom";
-import FlagQuiz from "./FlagQuiz";
+import { Link, Outlet } from "react-router-dom";
+import "../../css/Quiz.css";
 
 export default function Quiz() {
   return (

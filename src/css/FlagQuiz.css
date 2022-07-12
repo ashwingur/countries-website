@@ -4,12 +4,12 @@
   align-items: center;
   background-color: #e8e8e8;
   padding: 40px;
+  width: 80%;
 }
 
 .flag-quiz--main {
   display: flex;
   justify-content: space-between;
-  width: 80%;
 }
 
 .quiz-input {
