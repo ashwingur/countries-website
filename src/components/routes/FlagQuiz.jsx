@@ -78,6 +78,7 @@ export default function FlagQuiz(props) {
         return prevIndex + 1;
       }
     });
+    setCurrentInput("");
   }
 
   function gotoPrevFlag() {
@@ -88,6 +89,7 @@ export default function FlagQuiz(props) {
         return prevIndex - 1;
       }
     });
+    setCurrentInput("");
   }
 
   return (
@@ -100,6 +102,7 @@ export default function FlagQuiz(props) {
         id="country"
         onChange={inputChange}
         value={currentInput}
+        autoComplete="off"
         autoFocus
       ></input>
       <h3>
