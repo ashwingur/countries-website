@@ -7,6 +7,7 @@ export default function Quiz() {
     region: "Any",
     independent: "Either",
   });
+  const [showFilter, setShowFilter] = useState(true);
 
   function handleFilter(event) {
     const { name, value, type, checked } = event.target;
@@ -19,48 +20,54 @@ export default function Quiz() {
   }
   console.log(JSON.stringify(filter));
 
+  function onQuizClick() {
+    setShowFilter(false);
+  }
+
   return (
     <div className="quiz">
       <h1>Quiz Page</h1>
       <ul>
         <li>
-          <Link to="flag_quiz" state={filter}>
+          <Link to="flag_quiz" onClick={onQuizClick} state={filter}>
             Flag Quiz
           </Link>
         </li>
       </ul>
 
-      <div className="quiz-countries-filter">
-        <span>
-          <label htmlFor="independent">Independent </label>
-          <select
-            id="independent"
-            value={filter.independent}
-            onChange={handleFilter}
-            name="independent"
-          >
-            <option value="Either">Either</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </span>
-        <span>
-          <label htmlFor="region">Region </label>
-          <select
-            id="region"
-            value={filter.region}
-            onChange={handleFilter}
-            name="region"
-          >
-            <option value="Any">Any</option>
-            <option value="Africa">Africa</option>
-            <option value="Americas">Americas</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-          </select>
-        </span>
-      </div>
+      {showFilter && (
+        <div className="quiz-countries-filter">
+          <span>
+            <label htmlFor="independent">Independent </label>
+            <select
+              id="independent"
+              value={filter.independent}
+              onChange={handleFilter}
+              name="independent"
+            >
+              <option value="Either">Either</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </span>
+          <span>
+            <label htmlFor="region">Region </label>
+            <select
+              id="region"
+              value={filter.region}
+              onChange={handleFilter}
+              name="region"
+            >
+              <option value="Any">Any</option>
+              <option value="Africa">Africa</option>
+              <option value="Americas">Americas</option>
+              <option value="Asia">Asia</option>
+              <option value="Europe">Europe</option>
+              <option value="Oceania">Oceania</option>
+            </select>
+          </span>
+        </div>
+      )}
 
       <Outlet />
     </div>
