@@ -1,24 +1,45 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../css/FlagQuiz.css";
 
 export default function FlagQuiz(props) {
+  const navigate = useNavigate();
   const [totalCountries, setTotalCountries] = useState(0);
-  useEffect(() => {
-    setTotalCountries(
-      props.allCountries.filter((country) => {
-        return country.independent == true;
-      }).length
-    );
-  }, []);
+
+  function setInitialCountries() {
+    const location = useLocation();
+    const filter = location.state;
+
+    var initialCountries = props.allCountries
+      .filter((country) => {
+        if (filter.independent == "Either") {
+          return true;
+        } else if (filter.independent == "Yes") {
+          return country.independent;
+        } else {
+          return !country.independent;
+        }
+      })
+      .filter(
+        (country) => country.region == filter.region || filter.region == "Any"
+      );
+
+    useEffect(() => {
+      setTotalCountries(initialCountries.length);
+    }, []);
+
+    initialCountries = shuffle(initialCountries);
+
+    return initialCountries;
+  }
 
   const [remainingCountries, setRemainingCountries] = useState(
-    props.allCountries.filter((country) => {
-      return country.independent == true;
-    })
+    setInitialCountries()
   );
   const [currentCountry, setCurrentCountry] = useState(
     Math.floor(Math.random() * remainingCountries.length)
   );
+
   const [currentInput, setCurrentInput] = React.useState("");
 
   console.log(
@@ -32,14 +53,18 @@ export default function FlagQuiz(props) {
       remainingCountries[currentCountry].name.common.toLowerCase()
     ) {
       setCurrentInput("");
-      setRemainingCountries((prevState) => {
-        var newState = [...prevState];
-        newState.splice(currentCountry, 1);
-        return newState;
-      });
-      if (currentCountry >= remainingCountries.length) {
+      var tempCurrentCountry = currentCountry;
+      if (remainingCountries.length == 1) {
+        navigate("/quiz");
+      } else if (currentCountry == remainingCountries.length - 1) {
         setCurrentCountry(0);
       }
+
+      setRemainingCountries((prevState) => {
+        var newState = [...prevState];
+        newState.splice(tempCurrentCountry, 1);
+        return newState;
+      });
     } else {
       setCurrentInput(value);
     }
@@ -95,4 +120,12 @@ export default function FlagQuiz(props) {
       </div>
     </div>
   );
+}
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
