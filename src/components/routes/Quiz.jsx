@@ -1,13 +1,59 @@
-import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "../../css/Quiz.css";
 
-export default function Quiz() {
+export default function Quiz(props) {
   const [filter, setFilter] = useState({
     region: "Any",
     independent: "Either",
   });
   const [showFilter, setShowFilter] = useState(true);
+
+  const [quizData, setQuizData] = useState([]);
+  const [url, setUrl] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // console.log(`Url is ${url}`);
+    console.log(`QuizData is ${JSON.stringify(quizData)}`);
+    if (url != "") {
+      navigate(url, {
+        state: {
+          data: quizData,
+        },
+      });
+    }
+  }, [quizData]);
+
+  function getFilteredCountries() {
+    // Set the countries based on the filter
+    var initialCountries = props.allCountries
+      .filter((country) => {
+        if (filter.independent == "Either") {
+          return true;
+        } else if (filter.independent == "Yes") {
+          return country.independent;
+        } else {
+          return !country.independent;
+        }
+      })
+      .filter(
+        (country) => country.region == filter.region || filter.region == "Any"
+      );
+
+    initialCountries = shuffle(initialCountries);
+
+    return initialCountries;
+  }
+
+  function convertToFlagQuiz(countries) {
+    return countries.map((item) => {
+      return {
+        prompt: item.flags.svg,
+        answer: item.name.common,
+      };
+    });
+  }
 
   function handleFilter(event) {
     const { name, value, type, checked } = event.target;
@@ -18,9 +64,13 @@ export default function Quiz() {
       };
     });
   }
-  console.log(JSON.stringify(filter));
 
-  function onQuizClick() {
+  function onQuizClick(page, conversionFilter) {
+    setUrl(page);
+    setQuizData({
+      type: page,
+      countries: conversionFilter(getFilteredCountries()),
+    });
     setShowFilter(false);
   }
 
@@ -28,10 +78,12 @@ export default function Quiz() {
     <div className="quiz">
       <h1>Quiz Page</h1>
       <ul>
-        <li>
-          <Link to="flag_quiz" onClick={onQuizClick} state={filter}>
-            Flag Quiz
-          </Link>
+        <li
+          onClick={() => {
+            onQuizClick("flag_quiz", convertToFlagQuiz);
+          }}
+        >
+          Flag Quiz
         </li>
       </ul>
 
@@ -72,4 +124,12 @@ export default function Quiz() {
       <Outlet />
     </div>
   );
+}
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }

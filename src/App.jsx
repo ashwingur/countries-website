@@ -29,7 +29,7 @@ function App() {
           path="/all_countries"
           element={<AllCountries allCountries={allCountries} />}
         />
-        <Route path="/quiz" element={<Quiz />}>
+        <Route path="/quiz" element={<Quiz allCountries={allCountries} />}>
           <Route
             path="flag_quiz"
             element={<FlagQuiz allCountries={allCountries} />}

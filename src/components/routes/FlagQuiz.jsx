@@ -4,57 +4,28 @@ import "../../css/FlagQuiz.css";
 
 export default function FlagQuiz(props) {
   const navigate = useNavigate();
-  const [totalCountries, setTotalCountries] = useState(0);
-
-  function setInitialCountries() {
-    const location = useLocation();
-    const filter = location.state;
-
-    var initialCountries = props.allCountries
-      .filter((country) => {
-        if (filter.independent == "Either") {
-          return true;
-        } else if (filter.independent == "Yes") {
-          return country.independent;
-        } else {
-          return !country.independent;
-        }
-      })
-      .filter(
-        (country) => country.region == filter.region || filter.region == "Any"
-      );
-
-    useEffect(() => {
-      setTotalCountries(initialCountries.length);
-    }, []);
-
-    initialCountries = shuffle(initialCountries);
-
-    return initialCountries;
-  }
-
-  const [remainingCountries, setRemainingCountries] = useState(
-    setInitialCountries()
-  );
+  const totalCountries = useLocation().state.data.countries.length;
+  const [remainingCountries, setRemainingCountries] = useState([
+    ...useLocation().state.data.countries,
+  ]);
   const [currentCountry, setCurrentCountry] = useState(
     Math.floor(Math.random() * remainingCountries.length)
   );
 
   const [currentInput, setCurrentInput] = React.useState("");
 
-  console.log(
-    `Current Country is ${remainingCountries[currentCountry].name.common}`
-  );
+  console.log(`Answer is ${remainingCountries[currentCountry].answer}`);
 
   function inputChange(event) {
     const { value } = event.target;
     if (
       value.trim().toLowerCase() ==
-      remainingCountries[currentCountry].name.common.toLowerCase()
+      remainingCountries[currentCountry].answer.toLowerCase()
     ) {
       setCurrentInput("");
       var tempCurrentCountry = currentCountry;
       if (remainingCountries.length == 1) {
+        console.log("Navigating to /quiz");
         navigate("/quiz");
       } else if (currentCountry == remainingCountries.length - 1) {
         setCurrentCountry(0);
@@ -113,9 +84,9 @@ export default function FlagQuiz(props) {
         <span className="flag-quiz--back" onClick={gotoPrevFlag}>
           ←
         </span>
-        <img
-          className="flag-quiz--flag"
-          src={remainingCountries[currentCountry].flags.svg}
+        <PromptComponent
+          type={useLocation().state.data.type}
+          prompt={remainingCountries[currentCountry].prompt}
         />
         <span className="flag-quiz--right" onClick={gotoNextFlag}>
           →
@@ -125,10 +96,12 @@ export default function FlagQuiz(props) {
   );
 }
 
-function shuffle(a) {
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+function PromptComponent(props) {
+  const { type, prompt } = props;
+  switch (type) {
+    case "flag_quiz":
+      return <img className="flag-quiz--flag" src={prompt} />;
+    default:
+      return <p>Not yet implemented</p>;
   }
-  return a;
 }
