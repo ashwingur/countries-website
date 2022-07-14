@@ -1,0 +1,26 @@
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz > ul {
+  list-style: none;
+}
+
+.quiz > ul > li {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: orange;
+}
+
+.quiz > ul > li:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+  transition: background-color 0.3s ease;
+  color: orangered;
+}
+
+a:hover {
+  background-color: #98b9eb;
+}

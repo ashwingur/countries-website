@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import "../../css/Quiz.css";
+import "../../css/QuizPage.css";
 
 export default function Quiz(props) {
   const [filter, setFilter] = useState({
@@ -14,7 +14,7 @@ export default function Quiz(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // console.log(`Url is ${url}`);
+    // This effect navigates to the relevant quiz after a quiz is chosen
     console.log(`QuizData is ${JSON.stringify(quizData)}`);
     if (url != "") {
       navigate(url, {
@@ -55,6 +55,24 @@ export default function Quiz(props) {
     });
   }
 
+  function convertToCapitalQuiz(countries) {
+    return countries.map((item) => {
+      return {
+        prompt: item.name.common,
+        answer: item.capital,
+      };
+    });
+  }
+
+  function convertToCountryFromCapitalQuiz(countries) {
+    return countries.map((item) => {
+      return {
+        prompt: item.capital,
+        answer: item.name.common,
+      };
+    });
+  }
+
   function handleFilter(event) {
     const { name, value, type, checked } = event.target;
     setFilter((prevFilter) => {
@@ -65,10 +83,10 @@ export default function Quiz(props) {
     });
   }
 
-  function onQuizClick(page, conversionFilter) {
+  function onQuizClick(page, type, conversionFilter) {
     setUrl(page);
     setQuizData({
-      type: page,
+      type: type,
       countries: conversionFilter(getFilteredCountries()),
     });
     setShowFilter(false);
@@ -80,10 +98,28 @@ export default function Quiz(props) {
       <ul>
         <li
           onClick={() => {
-            onQuizClick("flag_quiz", convertToFlagQuiz);
+            onQuizClick("input_quiz", "flag_quiz", convertToFlagQuiz);
           }}
         >
-          Flag Quiz
+          Name the Flag
+        </li>
+        <li
+          onClick={() => {
+            onQuizClick("input_quiz", "capital_quiz", convertToCapitalQuiz);
+          }}
+        >
+          Name the Capital City
+        </li>
+        <li
+          onClick={() => {
+            onQuizClick(
+              "input_quiz",
+              "country_from_capital_quiz",
+              convertToCountryFromCapitalQuiz
+            );
+          }}
+        >
+          Name the Country from the Capital City
         </li>
       </ul>
 

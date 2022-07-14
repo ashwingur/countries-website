@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../../css/FlagQuiz.css";
+import "../../css/InputQuiz.css";
 
 export default function FlagQuiz(props) {
   const navigate = useNavigate();
@@ -17,11 +17,29 @@ export default function FlagQuiz(props) {
   console.log(`Answer is ${remainingCountries[currentCountry].answer}`);
 
   function inputChange(event) {
-    const { value } = event.target;
-    if (
-      value.trim().toLowerCase() ==
-      remainingCountries[currentCountry].answer.toLowerCase()
-    ) {
+    var { value } = event.target;
+    value = value.toLowerCase();
+    var correct = false;
+    var answer = remainingCountries[currentCountry].answer;
+    if (answer.constructor.name === "Array") {
+      console.log(`The array is ${remainingCountries[currentCountry].answer}`);
+      if (
+        answer
+          .map((item) => item.toLowerCase())
+          .forEach((item) => {
+            if (item.toLowerCase() == value.trim()) {
+              correct = true;
+            }
+          })
+      ) {
+        correct = true;
+        console.log("It is in array");
+      }
+    } else if (value.trim() == answer.toLowerCase()) {
+      console.log("It is in string");
+      correct = true;
+    }
+    if (correct) {
       setCurrentInput("");
       var tempCurrentCountry = currentCountry;
       if (remainingCountries.length == 1) {
@@ -68,7 +86,7 @@ export default function FlagQuiz(props) {
       <input
         type="text"
         className="quiz-input"
-        placeholder="Country"
+        placeholder="Answer"
         name="country"
         id="country"
         onChange={inputChange}
@@ -101,6 +119,10 @@ function PromptComponent(props) {
   switch (type) {
     case "flag_quiz":
       return <img className="flag-quiz--flag" src={prompt} />;
+    case "capital_quiz":
+      return <h1>{prompt}</h1>;
+    case "country_from_capital_quiz":
+      return <h1>{prompt}</h1>;
     default:
       return <p>Not yet implemented</p>;
   }

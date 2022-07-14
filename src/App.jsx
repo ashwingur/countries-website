@@ -4,8 +4,8 @@ import Navbar from "./components/Navbar";
 import AllCountries from "./components/routes/AllCountries";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/routes/Home";
-import Quiz from "./components/routes/Quiz";
-import FlagQuiz from "./components/routes/FlagQuiz";
+import Quiz from "./components/routes/QuizPage";
+import FlagQuiz from "./components/routes/InputQuiz";
 
 function App() {
   const [allCountries, setAllCountries] = useState([]);
@@ -31,7 +31,7 @@ function App() {
         />
         <Route path="/quiz" element={<Quiz allCountries={allCountries} />}>
           <Route
-            path="flag_quiz"
+            path="input_quiz"
             element={<FlagQuiz allCountries={allCountries} />}
           />
         </Route>
