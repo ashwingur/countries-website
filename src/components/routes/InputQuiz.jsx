@@ -14,7 +14,9 @@ export default function FlagQuiz(props) {
 
   const [currentInput, setCurrentInput] = React.useState("");
 
-  console.log(`Answer is ${remainingCountries[currentCountry].answer}`);
+  console.log(
+    `Answer for you cheaters is ${remainingCountries[currentCountry].answer}`
+  );
 
   function inputChange(event) {
     var { value } = event.target;
@@ -22,7 +24,6 @@ export default function FlagQuiz(props) {
     var correct = false;
     var answer = remainingCountries[currentCountry].answer;
     if (answer.constructor.name === "Array") {
-      console.log(`The array is ${remainingCountries[currentCountry].answer}`);
       if (
         answer
           .map((item) => item.toLowerCase())
@@ -33,10 +34,8 @@ export default function FlagQuiz(props) {
           })
       ) {
         correct = true;
-        console.log("It is in array");
       }
     } else if (value.trim() == answer.toLowerCase()) {
-      console.log("It is in string");
       correct = true;
     }
     if (correct) {

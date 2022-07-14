@@ -15,7 +15,6 @@ export default function Quiz(props) {
 
   useEffect(() => {
     // This effect navigates to the relevant quiz after a quiz is chosen
-    console.log(`QuizData is ${JSON.stringify(quizData)}`);
     if (url != "") {
       navigate(url, {
         state: {
