@@ -4,15 +4,23 @@
   align-items: center;
 }
 
-.quiz--title {
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz--title,
+.filters-header {
+  text-align: center;
   color: var(--secondary);
 }
 
-.quiz > ul {
+.quiz-options > ul {
   list-style: none;
 }
 
-.quiz > ul > li {
+.quiz-options > ul > li {
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: var(--secondary);
@@ -23,7 +31,7 @@
   border-radius: 5px;
 }
 
-.quiz > ul > li:hover {
+.quiz-options > ul > li:hover {
   cursor: pointer;
   background-color: var(--secondary);
   transition: all 0.5s ease;

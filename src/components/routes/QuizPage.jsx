@@ -94,37 +94,37 @@ export default function Quiz(props) {
   return (
     <div className="quiz">
       <h1 className="quiz--title">Quiz Page</h1>
-      <ul>
-        <li
-          onClick={() => {
-            onQuizClick("input_quiz", "flag_quiz", convertToFlagQuiz);
-          }}
-        >
-          Name the Flag
-        </li>
-        <li
-          onClick={() => {
-            onQuizClick("input_quiz", "capital_quiz", convertToCapitalQuiz);
-          }}
-        >
-          Name the Capital City
-        </li>
-        <li
-          onClick={() => {
-            onQuizClick(
-              "input_quiz",
-              "country_from_capital_quiz",
-              convertToCountryFromCapitalQuiz
-            );
-          }}
-        >
-          Name the Country from the Capital City
-        </li>
-      </ul>
 
       {showFilter && (
-        <div>
-          <h2>Country Filters</h2>
+        <div className="quiz-options">
+          <ul>
+            <li
+              onClick={() => {
+                onQuizClick("input_quiz", "flag_quiz", convertToFlagQuiz);
+              }}
+            >
+              Name the Flag
+            </li>
+            <li
+              onClick={() => {
+                onQuizClick("input_quiz", "capital_quiz", convertToCapitalQuiz);
+              }}
+            >
+              Name the Capital City
+            </li>
+            <li
+              onClick={() => {
+                onQuizClick(
+                  "input_quiz",
+                  "country_from_capital_quiz",
+                  convertToCountryFromCapitalQuiz
+                );
+              }}
+            >
+              Name the Country from the Capital City
+            </li>
+          </ul>
+          <h2 className="filters-header">Country Filters</h2>
           <div className="quiz-countries-filter">
             <span className="filter-item">
               <label htmlFor="independent" className="filter-label">
