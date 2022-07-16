@@ -64,7 +64,7 @@ code {
   border: 1px solid var(secondary);
   border-radius: 5px;
   border-width: 1px;
-  background-color: var(--primary-medium);
+  background-color: var(--primary);
   color: var(--secondary);
 }
 

@@ -31,12 +31,14 @@
   padding: 10px;
   text-indent: 10px;
   margin: 10px 30px;
-  width: 300px;
+  width: 400px;
+  max-width: 50vw;
 }
 
 .flag-quiz--flag {
-  height: 50vh;
+  max-height: 50vh;
   border: 1px solid black;
+  max-width: 80vw;
 }
 
 .input-quiz-prompt {

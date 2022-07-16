@@ -25,7 +25,12 @@ export default function FlagQuiz(props) {
     if (answer.constructor.name === "Array") {
       if (
         answer
-          .map((item) => item.toLowerCase())
+          .map((item) =>
+            item
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+          )
           .forEach((item) => {
             if (item.toLowerCase() == value.trim()) {
               correct = true;
