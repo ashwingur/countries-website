@@ -13,7 +13,6 @@ export default function FlagQuiz(props) {
   );
 
   const [currentInput, setCurrentInput] = React.useState("");
-
   console.log(
     `Answer for you cheaters is ${remainingCountries[currentCountry].answer}`
   );
@@ -82,35 +81,56 @@ export default function FlagQuiz(props) {
 
   return (
     <div className="flag-quiz">
-      <input
-        type="text"
-        className="quiz-input"
-        placeholder="Answer"
-        name="country"
-        id="country"
-        onChange={inputChange}
-        value={currentInput}
-        autoComplete="off"
-        autoFocus
-      ></input>
-      <h3>
+      <h1 className="input-quiz-title">
+        {getTitle(useLocation().state.data.type)}
+      </h1>
+      <div className="input-section">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/507/507257.png"
+          onClick={gotoPrevFlag}
+        />
+        <input
+          type="text"
+          className="quiz-input"
+          placeholder="Answer"
+          name="country"
+          id="country"
+          onChange={inputChange}
+          value={currentInput}
+          autoComplete="off"
+          autoFocus
+        />
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/271/271226.png"
+          onClick={gotoNextFlag}
+        />
+      </div>
+
+      <p>
         Correctly Guessed: {totalCountries - remainingCountries.length}/
         {totalCountries}
-      </h3>
+      </p>
       <div className="flag-quiz--main">
-        <span className="flag-quiz--back" onClick={gotoPrevFlag}>
-          ←
-        </span>
         <PromptComponent
           type={useLocation().state.data.type}
           prompt={remainingCountries[currentCountry].prompt}
         />
-        <span className="flag-quiz--right" onClick={gotoNextFlag}>
-          →
-        </span>
       </div>
     </div>
   );
+}
+
+function getTitle(type) {
+  switch (type) {
+    case "flag_quiz":
+      return "Name the Flag";
+    case "capital_quiz":
+      return "Name the Capital City";
+    case "country_from_capital_quiz":
+      return "Name the Country Based on the Capital City";
+    default:
+      return "Not yet implemented";
+  }
 }
 
 function PromptComponent(props) {
@@ -119,9 +139,9 @@ function PromptComponent(props) {
     case "flag_quiz":
       return <img className="flag-quiz--flag" src={prompt} />;
     case "capital_quiz":
-      return <h1>{prompt}</h1>;
+      return <h2 className="input-quiz-prompt">{prompt}</h2>;
     case "country_from_capital_quiz":
-      return <h1>{prompt}</h1>;
+      return <h2 className="input-quiz-prompt">{prompt}</h2>;
     default:
       return <p>Not yet implemented</p>;
   }

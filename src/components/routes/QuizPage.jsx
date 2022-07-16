@@ -16,7 +16,7 @@ export default function Quiz(props) {
   useEffect(() => {
     // This effect navigates to the relevant quiz after a quiz is chosen
     if (url != "") {
-      navigate(url, {
+      navigate("../" + url, {
         state: {
           data: quizData,
         },

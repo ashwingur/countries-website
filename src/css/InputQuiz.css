@@ -1,40 +1,44 @@
+.input-quiz-title {
+  color: var(--secondary);
+  margin-bottom: 30px;
+}
+
 .flag-quiz {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e8e8e8;
   padding: 40px;
-  width: 80%;
 }
 
-.flag-quiz--main {
+.input-section {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.input-section > img {
+  height: 50px;
+  cursor: pointer;
+  padding: 5px;
+}
+.input-section > img:hover {
+  background-color: var(--primary);
+  transition: background-color 0.4s ease;
+  border-radius: 10px;
 }
 
 .quiz-input {
   font-size: large;
   padding: 10px;
   text-indent: 10px;
+  margin: 10px 30px;
   width: 300px;
 }
 
-.flag-quiz--main > span {
-  font-size: 50px;
-  background-color: chocolate;
-  color: white;
-  margin: 100px 50px;
-  height: 100px;
-  width: 70px;
-  padding: 30px;
-}
-
-.flag-quiz--main > span:hover {
-  background-color: black;
-  transition: background-color 0.4s ease;
-  cursor: pointer;
-}
-
 .flag-quiz--flag {
-  width: 600px;
+  height: 50vh;
+  border: 1px solid black;
+}
+
+.input-quiz-prompt {
+  font-size: 40px;
 }

@@ -1,4 +1,4 @@
-.quiz {
+.quiz-options {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +14,11 @@
 .filters-header {
   text-align: center;
   color: var(--secondary);
+}
+
+.filters-header {
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 
 .quiz-options > ul {

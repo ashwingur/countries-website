@@ -29,12 +29,11 @@ function App() {
           path="/all_countries"
           element={<AllCountries allCountries={allCountries} />}
         />
-        <Route path="/quiz" element={<Quiz allCountries={allCountries} />}>
-          <Route
-            path="input_quiz"
-            element={<FlagQuiz allCountries={allCountries} />}
-          />
-        </Route>
+        <Route path="/quiz" element={<Quiz allCountries={allCountries} />} />
+        <Route
+          path="input_quiz"
+          element={<FlagQuiz allCountries={allCountries} />}
+        />
       </Routes>
     </div>
   );
