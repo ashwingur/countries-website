@@ -4,11 +4,13 @@ Provides information about all countries of the world, including non-independent
 
 ## TODO
 
-- [x] Design
-- [x] Mockups
-- [x] Development
-- [x] Unit testing
-- [ ] QA
-- [ ] Stage
-- [ ] Beta Testing
-- [ ] Production
+- [ ] Home Page
+- [ ] CSS Styling for quiz page
+- [ ] Improve the quiz interface
+- [ ] Fix refresh issues
+- [ ] CSS Styling for individual quizzes
+- [ ] CSS Styling for Navbar
+- [ ] Responsive CSS for different screen sizes
+- [ ] Name all the countries quiz (big list of textboxes that get filled as the person types a country)
+- [ ] Name all the capitals quiz (big list of textboxes that get filled as the person types a country)
+- [ ] Multiple choice quiz (for example which of the following 4 flags is the flag of Australia)
