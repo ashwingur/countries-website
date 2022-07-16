@@ -1,0 +1,25 @@
+.list-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list-quiz-box {
+  border: 1px solid black;
+}
+
+.list-quiz-box-answer {
+  width: 150px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.list-quiz-boxes {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0px 10px;
+}
+
+.box-answered {
+  background-color: var(--primary-light);
+}

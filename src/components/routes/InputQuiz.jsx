@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../css/InputQuiz.css";
 
-export default function FlagQuiz(props) {
+export default function InputQuiz() {
   const navigate = useNavigate();
   const totalCountries = useLocation().state.data.countries.length;
   const [remainingCountries, setRemainingCountries] = useState([
@@ -11,8 +11,8 @@ export default function FlagQuiz(props) {
   const [currentCountry, setCurrentCountry] = useState(
     Math.floor(Math.random() * remainingCountries.length)
   );
-
   const [currentInput, setCurrentInput] = React.useState("");
+
   console.log(
     `Answer for you cheaters is ${remainingCountries[currentCountry].answer}`
   );
@@ -25,21 +25,28 @@ export default function FlagQuiz(props) {
     if (answer.constructor.name === "Array") {
       if (
         answer
-          .map((item) =>
-            item
-              .toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
+          .map(
+            (item) =>
+              item
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "") // Removes all accents
           )
           .forEach((item) => {
-            if (item.toLowerCase() == value.trim()) {
+            if (item == value.trim()) {
               correct = true;
             }
           })
       ) {
         correct = true;
       }
-    } else if (value.trim() == answer.toLowerCase()) {
+    } else if (
+      value.trim() ==
+      answer
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+    ) {
       correct = true;
     }
     if (correct) {

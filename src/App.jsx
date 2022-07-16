@@ -5,7 +5,8 @@ import AllCountries from "./components/routes/AllCountries";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/routes/Home";
 import Quiz from "./components/routes/QuizPage";
-import FlagQuiz from "./components/routes/InputQuiz";
+import InputQuiz from "./components/routes/InputQuiz";
+import ListQuiz from "./components/routes/ListQuiz";
 
 function App() {
   const [allCountries, setAllCountries] = useState([]);
@@ -30,10 +31,8 @@ function App() {
           element={<AllCountries allCountries={allCountries} />}
         />
         <Route path="/quiz" element={<Quiz allCountries={allCountries} />} />
-        <Route
-          path="input_quiz"
-          element={<FlagQuiz allCountries={allCountries} />}
-        />
+        <Route path="input_quiz" element={<InputQuiz />} />
+        <Route path="list_quiz" element={<ListQuiz />} />
       </Routes>
     </div>
   );

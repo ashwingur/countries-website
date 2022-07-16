@@ -45,33 +45,6 @@ export default function Quiz(props) {
     return initialCountries;
   }
 
-  function convertToFlagQuiz(countries) {
-    return countries.map((item) => {
-      return {
-        prompt: item.flags.svg,
-        answer: item.name.common,
-      };
-    });
-  }
-
-  function convertToCapitalQuiz(countries) {
-    return countries.map((item) => {
-      return {
-        prompt: item.name.common,
-        answer: item.capital,
-      };
-    });
-  }
-
-  function convertToCountryFromCapitalQuiz(countries) {
-    return countries.map((item) => {
-      return {
-        prompt: item.capital,
-        answer: item.name.common,
-      };
-    });
-  }
-
   function handleFilter(event) {
     const { name, value, type, checked } = event.target;
     setFilter((prevFilter) => {
@@ -100,14 +73,14 @@ export default function Quiz(props) {
           <ul>
             <li
               onClick={() => {
-                onQuizClick("input_quiz", "flag_quiz", convertToFlagQuiz);
+                onQuizClick("input_quiz", "flag_quiz", flagQuiz);
               }}
             >
               Name the Flag
             </li>
             <li
               onClick={() => {
-                onQuizClick("input_quiz", "capital_quiz", convertToCapitalQuiz);
+                onQuizClick("input_quiz", "capital_quiz", capitalQuiz);
               }}
             >
               Name the Capital City
@@ -117,31 +90,26 @@ export default function Quiz(props) {
                 onQuizClick(
                   "input_quiz",
                   "country_from_capital_quiz",
-                  convertToCountryFromCapitalQuiz
+                  countryFromCapitalQuiz
                 );
               }}
             >
               Name the Country from the Capital City
             </li>
+            <li
+              onClick={() => {
+                onQuizClick(
+                  "list_quiz",
+                  "name_all_countries",
+                  nameAllCountriesQuiz
+                );
+              }}
+            >
+              Name all the Countries
+            </li>
           </ul>
           <h2 className="filters-header">Country Filters</h2>
           <div className="quiz-countries-filter">
-            <span className="filter-item">
-              <label htmlFor="independent" className="filter-label">
-                Independent{" "}
-              </label>
-              <select
-                className="filter-select"
-                id="independent"
-                value={filter.independent}
-                onChange={handleFilter}
-                name="independent"
-              >
-                <option value="Either">Either</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </span>
             <span className="filter-item">
               <label htmlFor="region" className="filter-label">
                 Region{" "}
@@ -161,6 +129,22 @@ export default function Quiz(props) {
                 <option value="Oceania">Oceania</option>
               </select>
             </span>
+            <span className="filter-item">
+              <label htmlFor="independent" className="filter-label">
+                Independent{" "}
+              </label>
+              <select
+                className="filter-select"
+                id="independent"
+                value={filter.independent}
+                onChange={handleFilter}
+                name="independent"
+              >
+                <option value="Either">Either</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </span>
           </div>
         </div>
       )}
@@ -168,6 +152,42 @@ export default function Quiz(props) {
       <Outlet />
     </div>
   );
+}
+
+function flagQuiz(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.flags.svg,
+      answer: item.name.common,
+    };
+  });
+}
+
+function capitalQuiz(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.name.common,
+      answer: item.capital,
+    };
+  });
+}
+
+function countryFromCapitalQuiz(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.capital,
+      answer: item.name.common,
+    };
+  });
+}
+
+function nameAllCountriesQuiz(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: "",
+      answer: item.name.common,
+    };
+  });
 }
 
 function shuffle(a) {
