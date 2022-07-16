@@ -1,11 +1,76 @@
+:root {
+  --primary: #eb9486;
+  --primary-medium: #f5cac2;
+  --primary-light: #fae5df;
+  --secondary: #303179;
+  --secondary-dark: #141850;
+  --background: #fffbfa;
+}
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Filter Formatting */
+
+.filter-item {
+  margin: 15px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.filter-select {
+  width: 300px;
+  font-size: 20px;
+  padding: 5px 10px;
+  border: none;
+  background-color: var(--primary-medium);
+  color: var(--secondary);
+  appearance: none;
+}
+
+.filter-input {
+  width: 300px;
+  font-size: 20px;
+  padding: 5px 10px;
+  border: none;
+  background-color: var(--primary-medium);
+  color: var(--secondary);
+}
+
+::placeholder {
+  color: #b4b4d6;
+}
+
+.filter-button {
+  width: 300px;
+  font-size: 20px;
+  padding: 5px 10px;
+  border: 1px solid var(secondary);
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: var(--primary-medium);
+  color: var(--secondary);
+}
+
+.filter-button:hover {
+  cursor: pointer;
+  background-color: var(--secondary);
+  transition: all 0.5s ease;
+  color: var(--primary);
 }

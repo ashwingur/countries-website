@@ -1,5 +1,5 @@
 nav {
-  background-color: #568bdb;
+  background-color: var(--primary-medium);
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -11,7 +11,7 @@ nav {
 }
 
 .nav--title {
-  color: white;
+  color: var(--secondary);
 }
 
 .nav--menu {
@@ -22,7 +22,7 @@ nav {
   margin-right: 10px;
   padding: 0;
   overflow: hidden;
-  background-color: #568bdb;
+  background-color: var(--primary-medium);
 }
 
 .nav--menu > li {
@@ -31,7 +31,7 @@ nav {
 
 .nav--menu > li a {
   display: block;
-  color: white;
+  color: var(--secondary-dark);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -39,5 +39,5 @@ nav {
 }
 
 a:hover {
-  background-color: #98b9eb;
+  background-color: var(--primary);
 }

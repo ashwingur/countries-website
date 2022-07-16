@@ -4,7 +4,9 @@
 }
 
 .all-countries-filter {
+  display: flex;
   align-self: center;
+  align-items: baseline;
 }
 
 .all-countries--title {

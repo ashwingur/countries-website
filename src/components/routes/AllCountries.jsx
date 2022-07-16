@@ -39,16 +39,6 @@ export default function AllCountries(props) {
     })
     .map((country) => <CountryCard {...country} key={country.cca2} />);
 
-  // useEffect(() => {
-  //   fetch("https://restcountries.com/v3.1/all")
-  //     .then((rest) => rest.json())
-  //     .then((data) => {
-  //       setAllCountries(
-  //         data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-  //       );
-  //     });
-  // }, []);
-
   function handleFilter(event) {
     const { name, value, type, checked } = event.target;
     setFilter((prevFilter) => {
@@ -75,11 +65,21 @@ export default function AllCountries(props) {
       </h2>
 
       <div className="all-countries-filter">
-        <button onClick={resetFilter}>Reset Filters</button>
+        <span className="filter-item">
+          <label className="filter-label" htmlFor="independent">
+            {" "}
+          </label>
+          <button className="filter-button" onClick={resetFilter}>
+            Reset Filters
+          </button>
+        </span>
 
-        <span className="all-countries-filter_item">
-          <label htmlFor="independent">Independent </label>
+        <span className="filter-item">
+          <label className="filter-label" htmlFor="independent">
+            Independent{" "}
+          </label>
           <select
+            className="filter-select"
             id="independent"
             value={filter.independent}
             onChange={handleFilter}
@@ -90,9 +90,12 @@ export default function AllCountries(props) {
             <option value="No">No</option>
           </select>
         </span>
-        <span className="all-countries-filter_item">
-          <label htmlFor="region">Region </label>
+        <span className="filter-item">
+          <label className="filter-label" htmlFor="region">
+            Region{" "}
+          </label>
           <select
+            className="filter-select"
             id="region"
             value={filter.region}
             onChange={handleFilter}
@@ -106,9 +109,12 @@ export default function AllCountries(props) {
             <option value="Oceania">Oceania</option>
           </select>
         </span>
-        <span className="all-countries-filter_item">
-          <label htmlFor="searchCountry">Search For Country </label>
+        <span className="filter-item">
+          <label className="filter-label" htmlFor="searchCountry">
+            Search For Country{" "}
+          </label>
           <input
+            className="filter-input"
             id="searchCountry"
             name="searchCountry"
             onChange={handleFilter}
