@@ -30,7 +30,9 @@ export default function InputQuiz() {
               item
                 .toLowerCase()
                 .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "") // Removes all accents
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(".", "")
+                .replace(".", "") // Removes all accents
           )
           .forEach((item) => {
             if (item == value.trim()) {
@@ -46,6 +48,8 @@ export default function InputQuiz() {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
+        .replace(".", "")
+        .replace(".", "")
     ) {
       correct = true;
     }
