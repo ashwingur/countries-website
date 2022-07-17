@@ -16,17 +16,17 @@ export default function ListQuiz() {
       answered: false,
     }))
   );
-  const [currentInput, setCurrentInput] = React.useState("");
+  const [currentInput, setCurrentInput] = useState("");
+  const [amountAnswered, setAmountAnswered] = useState(0);
+  const [givenUp, setGivenUp] = useState(false);
 
   const boxes = listBoxes.map((item) => (
-    <BoxItem {...item} key={item.answer} />
+    <BoxItem {...item} key={item.answer} givenUp={givenUp} />
   ));
 
   console.log(listBoxes);
 
-  var completed = true;
-  listBoxes.forEach((item) => (completed &= item.answered));
-  if (completed) {
+  if (amountAnswered == listBoxes.length) {
     console.log("Completed! Navigating to /quiz");
     navigate("/quiz");
   }
@@ -45,6 +45,9 @@ export default function ListQuiz() {
               .toLowerCase()
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "")
+              .replace(",", "")
+              .replace(".", "")
+              .replace(".", "")
           )
           .forEach((item) => {
             if (item == value.trim()) {
@@ -57,6 +60,9 @@ export default function ListQuiz() {
           .toLowerCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
+          .replace(",", "")
+          .replace(".", "")
+          .replace(".", "")
       ) {
         correct = true;
       }
@@ -67,6 +73,7 @@ export default function ListQuiz() {
           newState[i].answered = true;
           return newState;
         });
+        setAmountAnswered((prevValue) => prevValue + 1);
         break;
       } else {
         setCurrentInput(value);
@@ -79,18 +86,33 @@ export default function ListQuiz() {
       <h1 className="list-quiz-title">
         {getTitle(useLocation().state.data.type)}
       </h1>
-      <input
-        type="text"
-        className="quiz-input"
-        placeholder="Answer"
-        name="answer"
-        id="answer"
-        onChange={inputChange}
-        value={currentInput}
-        autoComplete="off"
-        autoFocus
-      />
+      {!givenUp && (
+        <input
+          type="text"
+          className="quiz-input"
+          placeholder="Answer"
+          name="answer"
+          id="answer"
+          onChange={inputChange}
+          value={currentInput}
+          autoComplete="off"
+          autoFocus
+        />
+      )}
+      <p>
+        Correctly Answered: {amountAnswered}/{listBoxes.length}
+      </p>
       <div className="list-quiz-boxes">{boxes}</div>
+      {!givenUp && (
+        <button
+          className="filter-button list-quiz-giveup"
+          onClick={() => {
+            setGivenUp(true);
+          }}
+        >
+          Give Up
+        </button>
+      )}
     </div>
   );
 }
@@ -98,18 +120,28 @@ export default function ListQuiz() {
 function getTitle(type) {
   switch (type) {
     case "name_all_countries":
-      return "Name all the Countries";
+      return "List all the Countries";
+    case "name_all_capitals_with_country":
+      return "List All the Capitals given the Country";
     default:
       return "Not yet implemented";
   }
 }
 
 function BoxItem(props) {
+  const answerClass =
+    props.givenUp && !props.answered
+      ? "list-quiz-box-answer list-quiz-box-answer-red"
+      : "list-quiz-box-answer";
+  const answer =
+    props.answer.constructor.name === "Array"
+      ? props.answer.join(", ")
+      : props.answer;
   return (
     <div className="list-quiz-box">
-      <span>{props.prompt}</span>
-      <span className="list-quiz-box-answer">
-        {props.answered ? props.answer : ""}
+      <span className="list-quiz-box-prompt">{props.prompt}</span>
+      <span className={answerClass}>
+        {props.answered || props.givenUp ? answer : ""}
       </span>
     </div>
   );

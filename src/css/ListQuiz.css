@@ -6,20 +6,41 @@
 
 .list-quiz-box {
   border: 1px solid black;
+  max-width: 250px;
 }
 
 .list-quiz-box-answer {
   width: 150px;
-  display: inline-block;
-  margin-left: 10px;
+  display: block;
+  padding-left: 10px;
+  min-height: 20px;
+  color: blue;
+}
+
+.list-quiz-box-answer-red {
+  color: red;
+}
+
+.list-quiz-box-prompt {
+  display: block;
+  width: 200px;
+  padding-left: 10px;
 }
 
 .list-quiz-boxes {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 0px 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .box-answered {
   background-color: var(--primary-light);
+}
+
+.list-quiz-giveup {
+  margin-top: 30px;
+  margin-bottom: 10px;
 }

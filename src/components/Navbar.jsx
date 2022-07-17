@@ -16,7 +16,7 @@ export default function Navbar() {
           <Link to="/all_countries">All Countries</Link>
         </li>
         <li>
-          <Link to="/quiz">Quiz</Link>
+          <Link to="/quiz">Quizzes</Link>
         </li>
       </ul>
     </nav>

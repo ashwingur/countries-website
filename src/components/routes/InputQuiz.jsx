@@ -119,7 +119,7 @@ export default function InputQuiz() {
       </div>
 
       <p>
-        Correctly Guessed: {totalCountries - remainingCountries.length}/
+        Correctly Answered: {totalCountries - remainingCountries.length}/
         {totalCountries}
       </p>
       <div className="flag-quiz--main">

@@ -66,7 +66,7 @@ export default function Quiz(props) {
 
   return (
     <div className="quiz">
-      <h1 className="quiz--title">Quiz Page</h1>
+      <h1 className="quiz--title">Quizzes</h1>
 
       {showFilter && (
         <div className="quiz-options">
@@ -106,6 +106,17 @@ export default function Quiz(props) {
               }}
             >
               Name all the Countries
+            </li>
+            <li
+              onClick={() => {
+                onQuizClick(
+                  "list_quiz",
+                  "name_all_capitals_with_country",
+                  nameAllCapitalsWithCountry
+                );
+              }}
+            >
+              Name all the Capitals with Country Listed
             </li>
           </ul>
           <h2 className="filters-header">Country Filters</h2>
@@ -186,6 +197,15 @@ function nameAllCountriesQuiz(countries) {
     return {
       prompt: "",
       answer: item.name.common,
+    };
+  });
+}
+
+function nameAllCapitalsWithCountry(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.name.common,
+      answer: item.capital,
     };
   });
 }

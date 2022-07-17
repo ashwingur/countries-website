@@ -5,14 +5,14 @@ Provides information about all countries of the world, including non-independent
 ## TODO
 
 - [ ] Home Page
-- [ ] CSS Styling for quiz page
+- [x] CSS Styling for quiz page
 - [ ] Improve the quiz interface
-- [ ] Fix refresh issues
-- [ ] Fix navigation issues when on quiz page
+- [x] Fix refresh issues
+- [x] Fix navigation issues when on quiz page
 - [ ] CSS Styling for individual quizzes
-- [ ] CSS Styling for Navbar
+- [x] CSS Styling for Navbar
 - [ ] Responsive CSS for different screen sizes
-- [ ] Name all the countries quiz (big list of textboxes that get filled as the person types a country)
+- [x] Name all the countries quiz (big list of textboxes that get filled as the person types a country)
 - [ ] Name all the capitals quiz (big list of textboxes that get filled as the person types a country)
 - [ ] Multiple choice quiz (for example which of the following 4 flags is the flag of Australia)
 - [ ] Create a backend for saving user data (for example high scores)
