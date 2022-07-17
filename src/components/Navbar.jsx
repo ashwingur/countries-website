@@ -1,5 +1,6 @@
 import React from "react";
 import WorldIcon from "../images/world_icon.png";
+import GitHubIcon from "../images/github_icon.png";
 import "../css/Navbar.css";
 import { Link } from "react-router-dom";
 
@@ -17,6 +18,11 @@ export default function Navbar() {
         </li>
         <li>
           <Link to="/quiz">Quizzes</Link>
+        </li>
+        <li>
+          <a href="https://github.com/ashwingur/countries-website">
+            <img className="git-logo" src={GitHubIcon} href />
+          </a>
         </li>
       </ul>
     </nav>

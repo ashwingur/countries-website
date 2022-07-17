@@ -11,6 +11,12 @@ nav {
   margin-right: 20px;
 }
 
+.git-logo {
+  /* padding: 0px 8px; */
+  height: 16px;
+  cursor: pointer;
+}
+
 .nav--title {
   color: var(--secondary);
 }
@@ -27,6 +33,8 @@ nav {
 
 .nav--menu > li {
   float: left;
+  transition: background-color 0.3s ease;
+  /* height: 40px; */
 }
 
 .nav--menu > li a {
@@ -35,9 +43,8 @@ nav {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
 }
 
-a:hover {
+li:hover {
   background-color: var(--primary);
 }
