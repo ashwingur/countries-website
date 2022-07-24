@@ -7,6 +7,7 @@ import Home from "./components/routes/Home";
 import Quiz from "./components/routes/QuizPage";
 import InputQuiz from "./components/routes/InputQuiz";
 import ListQuiz from "./components/routes/ListQuiz";
+import MultipleChoiceQuiz from "./components/routes/MultipleChoiceQuiz";
 
 function App() {
   const [allCountries, setAllCountries] = useState([]);
@@ -33,6 +34,7 @@ function App() {
         <Route path="/quiz" element={<Quiz allCountries={allCountries} />} />
         <Route path="input_quiz" element={<InputQuiz />} />
         <Route path="list_quiz" element={<ListQuiz />} />
+        <Route path="multiple_choice_quiz" element={<MultipleChoiceQuiz />} />
       </Routes>
     </div>
   );

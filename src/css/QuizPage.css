@@ -23,6 +23,7 @@
 
 .quiz-options > ul {
   list-style: none;
+  margin: 20px 80px;
 }
 
 .quiz-options > ul > li {

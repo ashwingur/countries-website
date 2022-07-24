@@ -21,7 +21,7 @@ export default function Navbar() {
         </li>
         <li>
           <a href="https://github.com/ashwingur/countries-website">
-            <img className="git-logo" src={GitHubIcon} href />
+            <img className="git-logo" src={GitHubIcon} />
           </a>
         </li>
       </ul>

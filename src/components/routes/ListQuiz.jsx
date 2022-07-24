@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../css/ListQuiz.css";
 
-/*Pass in quiz data as a list
-
-quizData = [{prompt: "", "Answer: "Australia", answered: false}]
-
-*/
 export default function ListQuiz() {
   const navigate = useNavigate();
   console.log(useLocation().state.data);

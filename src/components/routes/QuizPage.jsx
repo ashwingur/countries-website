@@ -118,6 +118,17 @@ export default function Quiz(props) {
             >
               Name all the Capitals with Country Listed
             </li>
+            <li
+              onClick={() => {
+                onQuizClick(
+                  "multiple_choice_quiz",
+                  "pick_capital_city_from_country",
+                  pickCapitalCityFromCountry
+                );
+              }}
+            >
+              Pick the correct capital city
+            </li>
           </ul>
           <h2 className="filters-header">Country Filters</h2>
           <div className="quiz-countries-filter">
@@ -202,6 +213,15 @@ function nameAllCountriesQuiz(countries) {
 }
 
 function nameAllCapitalsWithCountry(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.name.common,
+      answer: item.capital,
+    };
+  });
+}
+
+function pickCapitalCityFromCountry(countries) {
   return countries.map((item) => {
     return {
       prompt: item.name.common,
