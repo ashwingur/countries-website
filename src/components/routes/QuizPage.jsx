@@ -64,6 +64,19 @@ export default function Quiz(props) {
     setShowFilter(false);
   }
 
+  function QuizItem(props) {
+    const { text, page, type, conversionFilter } = props;
+    return (
+      <li
+        onClick={() => {
+          onQuizClick(page, type, conversionFilter);
+        }}
+      >
+        {text}
+      </li>
+    );
+  }
+
   return (
     <div className="quiz">
       <h1 className="quiz--title">Quizzes</h1>
@@ -71,75 +84,60 @@ export default function Quiz(props) {
       {showFilter && (
         <div className="quiz-options">
           <ul>
-            <li
-              onClick={() => {
-                onQuizClick("input_quiz", "flag_quiz", flagQuiz);
-              }}
-            >
-              Name the Flag
-            </li>
-            <li
-              onClick={() => {
-                onQuizClick("input_quiz", "capital_quiz", capitalQuiz);
-              }}
-            >
-              Name the Capital City
-            </li>
-            <li
-              onClick={() => {
-                onQuizClick(
-                  "input_quiz",
-                  "country_from_capital_quiz",
-                  countryFromCapitalQuiz
-                );
-              }}
-            >
-              Name the Country from the Capital City
-            </li>
-            <li
-              onClick={() => {
-                onQuizClick(
-                  "list_quiz",
-                  "name_all_countries",
-                  nameAllCountriesQuiz
-                );
-              }}
-            >
-              Name all the Countries
-            </li>
-            <li
-              onClick={() => {
-                onQuizClick(
-                  "list_quiz",
-                  "name_all_capitals_with_country",
-                  nameAllCapitalsWithCountry
-                );
-              }}
-            >
-              Name all the Capitals with Country Listed
-            </li>
-            <li
-              onClick={() => {
-                onQuizClick(
-                  "multiple_choice_quiz",
-                  "pick_capital_city_from_country",
-                  pickCapitalCityFromCountry
-                );
-              }}
-            >
-              Pick the Correct Capital City Given the Country
-            </li>
-            <li
-              onClick={() => {
-                onQuizClick(
-                  "multiple_choice_quiz",
-                  "pick_country_from_capital_city",
-                  pickCountryFromCapitalCity
-                );
-              }}
-            >
-              Pick the Correct Country Given the Capital City
-            </li>
+            <QuizItem
+              text="Name the Flag"
+              page="input_quiz"
+              type="flag_quiz"
+              conversionFilter={flagQuiz}
+            />
+            <QuizItem
+              text="Name the Capital City"
+              page="input_quiz"
+              type="capital_quiz"
+              conversionFilter={capitalQuiz}
+            />
+            <QuizItem
+              text="Name the Country from the Capital City"
+              page="input_quiz"
+              type="country_from_capital_quiz"
+              conversionFilter={countryFromCapitalQuiz}
+            />
+            <QuizItem
+              text="Name all the Countries"
+              page="list_quiz"
+              type="name_all_countries"
+              conversionFilter={nameAllCountriesQuiz}
+            />
+            <QuizItem
+              text="Name all the Capitals with Country Listed"
+              page="list_quiz"
+              type="name_all_capitals_with_country"
+              conversionFilter={nameAllCapitalsWithCountry}
+            />
+            <QuizItem
+              text="Pick the Correct Capital City Given the Country"
+              page="multiple_choice_quiz"
+              type="pick_capital_city_from_country"
+              conversionFilter={pickCapitalCityFromCountry}
+            />
+            <QuizItem
+              text="Pick the Correct Country Given the Capital City"
+              page="multiple_choice_quiz"
+              type="pick_country_from_capital_city"
+              conversionFilter={pickCountryFromCapitalCity}
+            />
+            <QuizItem
+              text="Pick the Correct Flag Given the Country"
+              page="multiple_choice_quiz"
+              type="pick_flag_from_country"
+              conversionFilter={pickFlagFromCountry}
+            />
+            <QuizItem
+              text="Pick the Country Given the Flag"
+              page="multiple_choice_quiz"
+              type="pick_country_from_flag"
+              conversionFilter={pickCountryFromFlag}
+            />
           </ul>
           <h2 className="filters-header">Country Filters</h2>
           <div className="quiz-countries-filter">
@@ -245,6 +243,24 @@ function pickCountryFromCapitalCity(countries) {
   return countries.map((item) => {
     return {
       prompt: item.capital,
+      answer: item.name.common,
+    };
+  });
+}
+
+function pickFlagFromCountry(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.name.common,
+      answer: item.flags.svg,
+    };
+  });
+}
+
+function pickCountryFromFlag(countries) {
+  return countries.map((item) => {
+    return {
+      prompt: item.flags.svg,
       answer: item.name.common,
     };
   });

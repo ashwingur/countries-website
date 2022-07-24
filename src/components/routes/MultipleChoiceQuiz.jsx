@@ -54,7 +54,6 @@ export default function MultipleChoiceQuiz() {
           <PromptComponent prompt={prompt} type={type} />
           <AnswerComponent
             countries={countries}
-            currentIndex={currentIndex}
             type={type}
             multiple_choice_options={randomIndexes}
             clickEvent={multipleChoiceClick}
@@ -86,21 +85,27 @@ function PromptComponent(props) {
           What Country has the Capital City {prompt}?
         </p>
       );
+    case "pick_flag_from_country":
+      return (
+        <p className="multiple-choice-prompt">What is the flag of {prompt}?</p>
+      );
+    case "pick_country_from_flag":
+      return <img className="multiple-choice-prompt_img" src={prompt} />;
     default:
-      return <p className="multiple-choice-prompt">Not yet implemented</p>;
+      return <p> className="multiple-choice-prompt">Not yet implemented</p>;
   }
 }
 
 function AnswerComponent(props) {
-  const { countries, currentIndex, type, clickEvent, multiple_choice_options } =
-    props;
+  const { countries, type, clickEvent, multiple_choice_options } = props;
 
   return (
     <div className="multiple-choice--answer_component">
       {multiple_choice_options.map((item) => {
         switch (type) {
-          case ("pick_capital_city_from_country",
-          "pick_country_from_capital_city"):
+          case "pick_capital_city_from_country":
+          case "pick_country_from_capital_city":
+          case "pick_country_from_flag":
             return (
               <p
                 className="multiple-choice--answer_item"
@@ -110,6 +115,17 @@ function AnswerComponent(props) {
                 {countries[item].answer}
               </p>
             );
+          case "pick_flag_from_country":
+            return (
+              <img
+                className="multiple-choice--answer_img"
+                src={countries[item].answer}
+                onClick={() => clickEvent(item)}
+                key={item}
+              />
+            );
+          default:
+            <p>Not yet implemented</p>;
         }
       })}
     </div>
@@ -136,6 +152,10 @@ function getTitle(type) {
       return "Pick the Capital City Given the Country";
     case "pick_country_from_capital_city":
       return "Pick the Country Given the Capital City";
+    case "pick_flag_from_country":
+      return "Pick the Flag Given the Country";
+    case "pick_country_from_flag":
+      return "Pick the Country Given the Flag";
 
     default:
       return "Not yet implemented";
