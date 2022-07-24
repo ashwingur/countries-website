@@ -115,19 +115,19 @@ export default function Quiz(props) {
               conversionFilter={nameAllCapitalsWithCountry}
             />
             <QuizItem
-              text="Pick the Correct Capital City Given the Country"
+              text="Pick the Capital City Given the Country"
               page="multiple_choice_quiz"
               type="pick_capital_city_from_country"
               conversionFilter={pickCapitalCityFromCountry}
             />
             <QuizItem
-              text="Pick the Correct Country Given the Capital City"
+              text="Pick the Country Given the Capital City"
               page="multiple_choice_quiz"
               type="pick_country_from_capital_city"
               conversionFilter={pickCountryFromCapitalCity}
             />
             <QuizItem
-              text="Pick the Correct Flag Given the Country"
+              text="Pick the Flag Given the Country"
               page="multiple_choice_quiz"
               type="pick_flag_from_country"
               conversionFilter={pickFlagFromCountry}
