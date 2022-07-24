@@ -9,21 +9,38 @@ export default function MultipleChoiceQuiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [randomIndexes, setRandomIndexes] = useState(
+    getRandomIndexes(currentIndex, countries.length)
+  );
+
+  const [correctText, setCorrectText] = useState("");
+  const [correctTextStyle, setCorrectTextStyle] = useState(
+    "multiple-choice-invisible"
+  );
+
   const prompt = countries[currentIndex].prompt;
 
   function multipleChoiceClick(index) {
     console.log(`Current index is ${currentIndex}`);
     if (index === currentIndex) {
-      console.log("Correct");
-      setCorrectCount((prevCount) => prevCount + 1);
+      setCorrectText("Corrrect");
+      setCorrectTextStyle("multiple-choice-correct");
+      setCorrectCount((prevValue) => prevValue + 1);
     } else {
       console.log("Incorrect");
+      setCorrectText("Incorrect");
+      setCorrectTextStyle("multiple-choice-incorrect");
     }
     if (currentIndex == countries.length - 1) {
       setFinished(true);
     } else {
+      setRandomIndexes(getRandomIndexes(currentIndex + 1, countries.length));
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }
+    setTimeout(() => {
+      setCorrectTextStyle("multiple-choice-invisible");
+      setCorrectText("");
+    }, 1000);
   }
 
   return (
@@ -32,13 +49,24 @@ export default function MultipleChoiceQuiz() {
       <p>
         Correctly Answered: {correctCount}/{countries.length}
       </p>
-      <PromptComponent prompt={prompt} type={type} />
-      <AnswerComponent
-        countries={countries}
-        currentIndex={currentIndex}
-        type={type}
-        clickEvent={multipleChoiceClick}
-      />
+      {!finished && (
+        <div>
+          <PromptComponent prompt={prompt} type={type} />
+          <AnswerComponent
+            countries={countries}
+            currentIndex={currentIndex}
+            type={type}
+            multiple_choice_options={randomIndexes}
+            clickEvent={multipleChoiceClick}
+          />
+        </div>
+      )}
+      <p className={correctTextStyle}>{correctText}</p>
+      {finished && (
+        <button className="filter-button" onClick={() => navigate("/quiz")}>
+          Back
+        </button>
+      )}
     </div>
   );
 }
@@ -52,23 +80,27 @@ function PromptComponent(props) {
           What is the capital of {prompt}?
         </p>
       );
+    case "pick_country_from_capital_city":
+      return (
+        <p className="multiple-choice-prompt">
+          What Country has the Capital City {prompt}?
+        </p>
+      );
     default:
       return <p className="multiple-choice-prompt">Not yet implemented</p>;
   }
 }
 
 function AnswerComponent(props) {
-  const { countries, currentIndex, type, clickEvent } = props;
-  const multiple_choice_options = getRandomIndexes(
-    currentIndex,
-    countries.length
-  );
+  const { countries, currentIndex, type, clickEvent, multiple_choice_options } =
+    props;
 
   return (
     <div className="multiple-choice--answer_component">
       {multiple_choice_options.map((item) => {
         switch (type) {
-          case "pick_capital_city_from_country":
+          case ("pick_capital_city_from_country",
+          "pick_country_from_capital_city"):
             return (
               <p
                 className="multiple-choice--answer_item"
@@ -101,7 +133,9 @@ function getRandomIndexes(answerIndex, arrayLength) {
 function getTitle(type) {
   switch (type) {
     case "pick_capital_city_from_country":
-      return "Pick the Capital City from the Country";
+      return "Pick the Capital City Given the Country";
+    case "pick_country_from_capital_city":
+      return "Pick the Country Given the Capital City";
 
     default:
       return "Not yet implemented";

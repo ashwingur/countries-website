@@ -13,6 +13,7 @@
 
 .multiple-choice-prompt {
   font-size: 24px;
+  text-align: center;
 }
 
 .multiple-choice--answer_item {
@@ -20,7 +21,7 @@
   text-align: center;
   display: inline-block;
   border: 1px solid black;
-  width: 200px;
+  width: 250px;
   padding: 10px;
   color: var(--secondary);
   background-color: var(--primary);
@@ -30,4 +31,18 @@
   background-color: var(--secondary);
   color: var(--primary);
   transition: all 0.3s ease;
+}
+
+.multiple-choice-invisible {
+  visibility: hidden;
+}
+
+.multiple-choice-correct {
+  color: green;
+  font-size: 20px;
+}
+
+.multiple-choice-incorrect {
+  color: red;
+  font-size: 20px;
 }
