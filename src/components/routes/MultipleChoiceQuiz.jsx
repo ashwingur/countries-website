@@ -62,9 +62,12 @@ export default function MultipleChoiceQuiz() {
       )}
       <p className={correctTextStyle}>{correctText}</p>
       {finished && (
-        <button className="filter-button" onClick={() => navigate("/quiz")}>
-          Back
-        </button>
+        <div>
+          <p className="multiple-choice-finished">Quiz Completed</p>
+          <button className="filter-button" onClick={() => navigate("/quiz")}>
+            Back
+          </button>
+        </div>
       )}
     </div>
   );
@@ -92,7 +95,7 @@ function PromptComponent(props) {
     case "pick_country_from_flag":
       return <img className="multiple-choice-prompt_img" src={prompt} />;
     default:
-      return <p> className="multiple-choice-prompt">Not yet implemented</p>;
+      return <p>Not yet implemented</p>;
   }
 }
 
