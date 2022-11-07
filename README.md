@@ -2,6 +2,8 @@
 
 Provides information about all countries of the world, including non-independent countries using the [REST COUNTRIES](https://restcountries.com/) api. There is also a quizzes section that contains many types of quizzes to help with learning about countries, capital cities and flags.
 
+Visit the website [here](https://countries-website.pages.dev/).
+
 ## TODO
 
 - [ ] Home Page
